@@ -174,7 +174,10 @@ expStdoutLog TCL_VARARGS_DEF(int,arg1)
     force_stdout = TCL_VARARGS_START(int,arg1,args);
     fmt = va_arg(args,char *);
 
-    if ((!tsdPtr->logUser) && (!force_stdout) && (!tsdPtr->logAll)) return;
+    if ((!tsdPtr->logUser) && (!force_stdout) && (!tsdPtr->logAll)) {
+	va_end(args);
+	return;
+    }
 
     (void) vsprintf(bigbuf,fmt,args);
     expDiagWriteBytes(bigbuf,-1);

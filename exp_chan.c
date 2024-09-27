@@ -51,6 +51,8 @@ static void		ExpWatchProc _ANSI_ARGS_((ClientData instanceData,
 		            int mask));
 static int		ExpGetHandleProc _ANSI_ARGS_((ClientData instanceData,
 		            int direction, ClientData *handlePtr));
+void			exp_background_channelhandler _ANSI_ARGS_((ClientData,
+		            int));
 
 /*
  * This structure describes the channel type structure for Expect-based IO:
@@ -58,7 +60,7 @@ static int		ExpGetHandleProc _ANSI_ARGS_((ClientData instanceData,
 
 Tcl_ChannelType expChannelType = {
     "exp",				/* Type name. */
-    ExpBlockModeProc,			/* Set blocking/nonblocking mode.*/
+    TCL_CHANNEL_VERSION_2,
     ExpCloseProc,			/* Close proc. */
     ExpInputProc,			/* Input proc. */
     ExpOutputProc,			/* Output proc. */
@@ -68,6 +70,7 @@ Tcl_ChannelType expChannelType = {
     ExpWatchProc,			/* Initialize notifier. */
     ExpGetHandleProc,			/* Get OS handles out of channel. */
     NULL,				/* Close2 proc */
+    ExpBlockModeProc,			/* Set blocking/nonblocking mode.*/
 };
 
 typedef struct ThreadSpecificData {

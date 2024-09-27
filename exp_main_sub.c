@@ -57,6 +57,7 @@ int exp_cmdlinecmds = FALSE;
 int exp_interactive =  FALSE;
 int exp_buffer_command_input = FALSE;/* read in entire cmdfile at once */
 int exp_fgets();
+int exp_tty_cooked_echo(Tcl_Interp *interp, exp_tty *tty_old, int *was_raw, int *was_echo);
 
 Tcl_Interp *exp_interp;	/* for use by signal handlers who can't figure out */
 			/* the interpreter directly */
