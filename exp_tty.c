@@ -280,7 +280,7 @@ exp_tty_break(
 char *
 exp_cook(
     char *s,
-    int *len)	/* current and new length of s */
+    Tcl_Size *len)	/* current and new length of s */
 {
 	static int destlen = 0;
 	static char *dest = 0;

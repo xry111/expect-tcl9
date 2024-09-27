@@ -309,7 +309,7 @@ EXTERN int		exp_i_update _ANSI_ARGS_((Tcl_Interp *,
 
 struct exp_cmd_data {
 	char		*name;
-	Tcl_ObjCmdProc	*objproc;
+	Tcl_ObjCmdProc2	*objproc;
 	Tcl_CmdProc	*proc;
 	ClientData	data;
 	int 		flags;

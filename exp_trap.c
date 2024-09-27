@@ -147,7 +147,7 @@ int code;
 		Tcl_AsyncMark(async_handler);
 	} else {
 		got_sig = -1;
-		for (i=1;i<NSIG;i++) {
+		for (int i=1;i<NSIG;i++) {
 			if (traps[i].mark) {
 				got_sig = i;
 				Tcl_AsyncMark(async_handler);
@@ -304,11 +304,10 @@ int objc;
 Tcl_Obj *CONST objv[];
 {
 	char *action = 0;
-	int n;		/* number of signals in list */
+	Tcl_Size n;		/* number of signals in list */
 	Tcl_Obj **list;	/* list of signals */
 	char *arg;
 	int len;	/* length of action */
-	int i;
 	int show_name = FALSE;	/* if user asked for current sig by name */
 	int show_number = FALSE;/* if user asked for current sig by number */
 	int show_max = FALSE;	/* if user asked for NSIG-1 */
@@ -382,7 +381,7 @@ Tcl_Obj *CONST objv[];
 	  return TCL_ERROR;
 	}
 
-	for (i=0;i<n;i++) {
+	for (Tcl_Size i=0;i<n;i++) {
 	  char *s;
 	  int sig;
 
@@ -509,7 +508,7 @@ int oldcode;
 
 		if (eip) {
 		  /* odd that Tcl doesn't have a call that does all this at once */
-		  int len;
+		  Tcl_Size len;
 		  char *s = Tcl_GetStringFromObj(eip,&len);
 		  Tcl_AddObjErrorInfo(interp,s,len);
 		  Tcl_DecrRefCount(eip);

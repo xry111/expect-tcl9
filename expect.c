@@ -285,7 +285,8 @@ exp_eval_with_one_arg(
     CONST char *p;
     CONST char *next;
     int rc;
-    int bytesLeft, numWords;
+    Tcl_Size bytesLeft;
+    int numWords;
     Tcl_Parse parse;
 
     /*
@@ -490,7 +491,7 @@ parse_expect_args(
 		{
 		    Tcl_Obj* g;
 		    Tcl_UniChar* str;
-		    int strlen;
+		    Tcl_Size strlen;
 
 		    str = Tcl_GetUnicodeFromObj (objv[i], &strlen);
 		    g = exp_retoglob (str, strlen);
@@ -852,7 +853,7 @@ eval_case_string(
 	expDiagLog("\"? ");
 
 	if (e->gate) {
-	    int plen;
+	    Tcl_Size plen;
 	    Tcl_UniChar* pat = Tcl_GetUnicodeFromObj(e->gate,&plen);
 
 	    expDiagLog("Gate \"");
@@ -915,7 +916,7 @@ eval_case_string(
 	expDiagLogU(expPrintify(Tcl_GetString(e->pat)));
 	expDiagLog("\"? ");
 	if (str) {
-	    int plen;
+	    Tcl_Size plen;
 	    Tcl_UniChar* pat = Tcl_GetUnicodeFromObj(e->pat,&plen);
 
 	    match = Exp_StringCaseMatch(str,numchars, pat, plen,
@@ -932,7 +933,7 @@ eval_case_string(
 	}
 	expDiagLogU(no);
     } else if (e->use == PAT_EXACT) {
-	int patLength;
+	Tcl_Size patLength;
 	char *pat = Tcl_GetStringFromObj(e->pat, &patLength);
 	Tcl_UniChar *p;
 
@@ -1384,7 +1385,7 @@ int
 Exp_ExpectGlobalObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     int result = TCL_OK;
@@ -2525,7 +2526,7 @@ int
 Exp_ExpectObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     int cc;			/* number of chars returned in a single read */
@@ -2782,7 +2783,7 @@ static int
 Exp_TimestampObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
 	char *format = 0;
@@ -2962,7 +2963,7 @@ int
 Exp_MatchMaxObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     int size = -1;
@@ -3008,7 +3009,7 @@ int
 Exp_RemoveNullsObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     int value = -1;
@@ -3052,7 +3053,7 @@ int
 Exp_ParityObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     int parity;
@@ -3091,7 +3092,7 @@ int
 Exp_CloseOnEofObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     int close_on_eof;

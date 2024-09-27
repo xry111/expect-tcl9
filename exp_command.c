@@ -575,7 +575,7 @@ static int
 Exp_SpawnObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     ExpState *esPtr = 0;
@@ -1370,7 +1370,7 @@ static int
 Exp_ExpPidObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     char *chanName = 0;
@@ -1420,7 +1420,7 @@ static int
 Exp_GetpidDeprecatedObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     expDiagLog("getpid is deprecated, use pid\r\n");
@@ -1433,7 +1433,7 @@ static int
 Exp_SleepObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     double s;
@@ -1837,8 +1837,8 @@ exp_i_parse_states(
 {
     struct ExpState *esPtr;
     char *p = i->value;
-    int argc;
-    char **argv;
+    Tcl_Size argc;
+    const char **argv;
     int j;
 
     if (Tcl_SplitList(NULL, p, &argc, &argv) != TCL_OK) goto error;
@@ -1916,7 +1916,7 @@ static int
 Exp_SendLogObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     static char* options[] = { "--", NULL };
@@ -1960,7 +1960,7 @@ static int
 Exp_SendObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])
 {
     ThreadSpecificData *tsdPtr = TCL_TSD_INIT(&dataKey);
@@ -1977,7 +1977,7 @@ Exp_SendObjCmd(
     int send_style = SEND_STYLE_PLAIN;
     int want_cooked = TRUE;
     char *string;		/* string to send */
-    int len = -1;		/* length of string to send */
+    Tcl_Size len = -1;		/* length of string to send */
     int zeros;		/* count of how many ascii zeros to send */
 
     char *chanName = 0;
@@ -2158,7 +2158,7 @@ static int
 Exp_LogFileObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     static char resultbuf[1000];
@@ -2291,7 +2291,7 @@ static int
 Exp_LogUserObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     int old_loguser = expLogUserGet();
@@ -2323,7 +2323,7 @@ static int
 Exp_DebugObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     int now = FALSE;	/* soon if FALSE, now if TRUE */
@@ -2393,7 +2393,7 @@ static int
 Exp_ExpInternalObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     int newChannel = FALSE;
@@ -2473,7 +2473,7 @@ static int
 Exp_ExitObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     int value = 0;
@@ -2486,7 +2486,7 @@ Exp_ExitObjCmd(
 	    objc--;
 	    objv++;
 	    if (objc) {
-		int len;
+		Tcl_Size len;
 		char* act = Tcl_GetStringFromObj (objv[0], &len);
 
 		if (exp_onexit_action)
@@ -2529,7 +2529,7 @@ static int
 Exp_ConfigureObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])	/* Argument objects. */
 {
     /* Magic configuration stuff. */
@@ -2570,7 +2570,7 @@ static int
 Exp_CloseObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[]) 	/* Argument objects. */
 {
     int onexec_flag = FALSE;	/* true if -onexec seen */
@@ -2708,7 +2708,7 @@ static int
 Exp_StraceObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     static int trace_level = 0;
@@ -2862,7 +2862,7 @@ static int
 Exp_WaitObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     char *chanName = 0;
@@ -3075,7 +3075,7 @@ static int
 Exp_ForkObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     int rc;
@@ -3109,7 +3109,7 @@ static int
 Exp_DisconnectObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     ThreadSpecificData *tsdPtr = TCL_TSD_INIT(&dataKey);
@@ -3219,7 +3219,7 @@ static int
 Exp_OverlayObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     int newfd, oldfd;
@@ -3310,7 +3310,7 @@ int
 Exp_InterpreterObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     Tcl_Obj *eofObj = 0;
@@ -3358,7 +3358,7 @@ int
 Exp_ExpContinueObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     if (objc == 1) {
@@ -3378,7 +3378,7 @@ int
 Exp_InterReturnObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])
 {
     /* let Tcl's return command worry about args */
@@ -3399,7 +3399,7 @@ int
 Exp_OpenObjCmd(
     ClientData clientData,
     Tcl_Interp *interp,
-    int objc,
+    Tcl_Size objc,
     Tcl_Obj *CONST objv[])		/* Argument objects. */
 {
     ExpState *esPtr;
@@ -3517,7 +3517,7 @@ exp_create_commands(interp,c)
 		!(Tcl_FindHashEntry(&globalNsPtr->cmdTable,c->name) ||
 			Tcl_FindHashEntry(&currNsPtr->cmdTable,c->name))) {
 	    if (c->objproc)
-		Tcl_CreateObjCommand(interp,c->name,
+		Tcl_CreateObjCommand2(interp,c->name,
 			c->objproc,c->data,exp_deleteObjProc);
 	    else
 		Tcl_CreateCommand(interp,c->name,c->proc,
@@ -3529,7 +3529,7 @@ exp_create_commands(interp,c)
 		&& !(c->flags & EXP_NOPREFIX)) {
 	    sprintf(cmdnamebuf,"exp_%s",c->name);
 	    if (c->objproc)
-		Tcl_CreateObjCommand(interp,cmdnamebuf,c->objproc,c->data,
+		Tcl_CreateObjCommand2(interp,cmdnamebuf,c->objproc,c->data,
 			exp_deleteObjProc);
 	    else
 		Tcl_CreateCommand(interp,cmdnamebuf,c->proc,

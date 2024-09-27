@@ -362,7 +362,7 @@ char *argv[];
 	static char buf_basic[DEFAULT_WIDTH+1];	/* basic buffer */
 	static char *buf = buf_basic;
 	int space;		/* space remaining in buf */
-	int len;
+	Tcl_Size len;
 	char *bufp;
 	int proc;		/* if current command is "proc" */
 	int arg_index;
@@ -443,7 +443,7 @@ Tcl_Obj *objv[];
 {
     char **argv;
     int argc;
-    int len;
+    Tcl_Size len;
     argv = (char **)ckalloc(objc+1 * sizeof(char *));
     for (argc=0 ; argc<objc ; argc++) {
 	argv[argc] = Tcl_GetStringFromObj(objv[argc],&len);
