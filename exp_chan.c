@@ -502,7 +502,7 @@ expSizeZero(esPtr)
 int
 expWriteChars(esPtr,buffer,lenBytes)
      ExpState *esPtr;
-     char *buffer;
+     const char *buffer;
      int lenBytes;
 {
   int rc;

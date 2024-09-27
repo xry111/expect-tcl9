@@ -106,7 +106,7 @@ int fd;
 
 void
 exp_win_rows_set(rows)
-char *rows;
+const char *rows;
 {
 	winsize.rows = atoi(rows);
 	exp_window_size_set(exp_dev_tty);
@@ -123,7 +123,7 @@ exp_win_rows_get()
 
 void
 exp_win_columns_set(columns)
-char *columns;
+const char *columns;
 {
 	winsize.columns = atoi(columns);
 	exp_window_size_set(exp_dev_tty);
@@ -167,7 +167,7 @@ int fd;
 void
 exp_win2_rows_set(fd,rows)
 int fd;
-char *rows;
+const char *rows;
 {
 	exp_win2_size_get(fd);
 	win2size.rows = atoi(rows);
@@ -191,7 +191,7 @@ int fd;
 void
 exp_win2_columns_set(fd,columns)
 int fd;
-char *columns;
+const char *columns;
 {
 	exp_win2_size_get(fd);
 	win2size.columns = atoi(columns);

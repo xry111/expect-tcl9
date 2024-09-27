@@ -353,7 +353,7 @@ expDiagLogPtrStrStr(fmt,str1,str2)
 
 static const char *		(*expErrnoMsgVal) _ANSI_ARGS_((int));
 
-char *
+const char *
 expErrnoMsg(errorNo)
 int errorNo;
 {

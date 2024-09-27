@@ -277,9 +277,9 @@ exp_tty_break(
 /* to write send_user strings without always putting in \r. */
 /* If len == 0, use strlen to compute it */
 /* NB: if terminal is not in raw mode, nothing is done. */
-char *
+const char *
 exp_cook(
-    char *s,
+    const char *s,
     Tcl_Size *len)	/* current and new length of s */
 {
 	static int destlen = 0;
@@ -507,7 +507,7 @@ Exp_SttyCmd(
 		/* a different tty */
 
 		/* temporarily zap redirect */
-		char *redirect_save = *redirect;
+		const char *redirect_save = *redirect;
 		*redirect = 0;
 
 		for (argv=argv0+1;*argv;argv++) {

@@ -44,7 +44,7 @@ EXTERN int	exp_interpret_cmdfile _ANSI_ARGS_((Tcl_Interp *,FILE *));
 EXTERN int	exp_interpret_cmdfilename _ANSI_ARGS_((Tcl_Interp *,char *));
 EXTERN void	exp_interpret_rcfiles _ANSI_ARGS_((Tcl_Interp *,int my_rc,int sys_rc));
 
-EXTERN char *	exp_cook _ANSI_ARGS_((char *s,Tcl_Size *len));
+EXTERN const char *	exp_cook _ANSI_ARGS_((const char *s,Tcl_Size *len));
 
 EXTERN void	expCloseOnExec _ANSI_ARGS_((int));
 

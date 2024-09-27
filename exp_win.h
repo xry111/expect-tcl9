@@ -11,12 +11,12 @@ would appreciate credit if you use this file or parts of it.
 int exp_window_size_set();
 int exp_window_size_get();
 
-void  exp_win_rows_set    _ANSI_ARGS_ ((char* rows));
+void  exp_win_rows_set    _ANSI_ARGS_ ((const char* rows));
 char* exp_win_rows_get    _ANSI_ARGS_ ((void));
-void  exp_win_columns_set _ANSI_ARGS_ ((char* columns));
+void  exp_win_columns_set _ANSI_ARGS_ ((const char* columns));
 char* exp_win_columns_get _ANSI_ARGS_ ((void));
 
-void  exp_win2_rows_set    _ANSI_ARGS_ ((int fd, char* rows));
+void  exp_win2_rows_set    _ANSI_ARGS_ ((int fd, const char* rows));
 char* exp_win2_rows_get    _ANSI_ARGS_ ((int fd));
-void  exp_win2_columns_set _ANSI_ARGS_ ((int fd, char* columns));
+void  exp_win2_columns_set _ANSI_ARGS_ ((int fd, const char* columns));
 char* exp_win2_columns_get _ANSI_ARGS_ ((int fd));

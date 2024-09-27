@@ -2044,12 +2044,12 @@ which looks in the global space if they are not in the local space.
 This allows the user to localize them if desired, and also to
 avoid having to put "global" in procedure definitions.
 */
-char *
+const char *
 exp_get_var(
     Tcl_Interp *interp,
     char *var)
 {
-    char *val;
+    const char *val;
 
     if (NULL != (val = Tcl_GetVar(interp,var,0 /* local */)))
 	return(val);

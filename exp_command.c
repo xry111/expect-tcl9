@@ -191,7 +191,7 @@ expStateCurrent(
 {
     static char *user_spawn_id = "exp0";
 
-    char *name = exp_get_var(interp,SPAWN_ID_VARNAME);
+    const char *name = exp_get_var(interp,SPAWN_ID_VARNAME);
     if (!name) name = user_spawn_id;
 
     return expStateFromChannelName(interp,name,opened,adjust,any,SPAWN_ID_VARNAME);
@@ -203,7 +203,7 @@ expStateCheck(
     ExpState *esPtr,
     int open,
     int adjust,
-    char *msg)
+    const char *msg)
 {
     if (open && !esPtr->open) {
 	exp_error(interp,"%s: spawn id %s not open",msg,esPtr->name);
@@ -216,11 +216,11 @@ expStateCheck(
 ExpState *
 expStateFromChannelName(
     Tcl_Interp *interp,
-    char *name,
+    const char *name,
     int open,
     int adjust,
     int any,
-    char *msg)
+    const char *msg)
 {
     ExpState *esPtr;
     Tcl_Channel channel;
@@ -284,7 +284,7 @@ exp_trap_on(int master)
 }
 
 int
-exp_trap_off(char *name)
+exp_trap_off(const char *name)
 {
 #ifdef HAVE_PTYTRAP
     ExpState *esPtr;
@@ -357,7 +357,7 @@ exp_close(
 	     */
 
 	    ThreadSpecificData* tsdPtr = TCL_TSD_INIT(&dataKey);
-	    char*               cName  = Tcl_GetChannelName(esPtr->chan_orig->channel_orig);
+	    const char*         cName  = Tcl_GetChannelName(esPtr->chan_orig->channel_orig);
 	    Tcl_HashEntry*      entry  = Tcl_FindHashEntry(&tsdPtr->origins,cName);
 	    ExpOrigin*          orig   = (ExpOrigin*) Tcl_GetHashValue(entry);
 
@@ -1491,7 +1491,7 @@ static int
 slow_write(
     Tcl_Interp *interp,
     ExpState *esPtr,
-    char *buffer,
+    const char *buffer,
     int rembytes,
     struct slow_arg *arg)
 {
@@ -1499,7 +1499,7 @@ slow_write(
 
     while (rembytes > 0) {
 	int i, bytelen, charlen;
-	char *p;
+	const char *p;
 
 	p = buffer;
 	charlen = (arg->size<rembytes?arg->size:rembytes);
@@ -1599,10 +1599,10 @@ static int
 human_write(
     Tcl_Interp *interp,
     ExpState *esPtr,
-    char *buffer,
+    const char *buffer,
     struct human_arg *arg)
 {
-    char *sp;
+    const char *sp;
     int size;
     float t;
     float alpha;
@@ -1770,7 +1770,7 @@ exp_free_i(
 struct exp_i *
 exp_new_i_complex(
     Tcl_Interp *interp,
-    const char *arg,		/* spawn id list or a variable containing a list */
+    char *arg,		/* spawn id list or a variable containing a list */
     int duration,		/* if we have to copy the args */
     /* should only need do this in expect_before/after */
     Tcl_VarTraceProc *updateproc)	/* proc to invoke if indirect is written */
@@ -1864,7 +1864,7 @@ exp_i_update(
     Tcl_Interp *interp,
     struct exp_i *i)
 {
-    char *p;	/* string representation of list of spawn ids */
+    const char *p;	/* string representation of list of spawn ids */
 
     if (i->direct == EXP_INDIRECT) {
 	p = Tcl_GetVar(interp,i->variable,TCL_GLOBAL_ONLY);
@@ -1976,7 +1976,7 @@ Exp_SendObjCmd(
 #define SEND_STYLE_BREAK	0x20
     int send_style = SEND_STYLE_PLAIN;
     int want_cooked = TRUE;
-    char *string;		/* string to send */
+    const char *string;		/* string to send */
     Tcl_Size len = -1;		/* length of string to send */
     int zeros;		/* count of how many ascii zeros to send */
 

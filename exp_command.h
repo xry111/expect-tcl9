@@ -28,7 +28,7 @@ would appreciate credit if this program or parts of it are used.
 
 #define EXP_CHANNELNAMELEN (16 + TCL_INTEGER_SPACE)
 
-EXTERN char *		exp_get_var _ANSI_ARGS_((Tcl_Interp *,char *));
+EXTERN const char *		exp_get_var _ANSI_ARGS_((Tcl_Interp *,char *));
 
 EXTERN int exp_default_match_max;
 EXTERN int exp_default_parity;
@@ -211,7 +211,7 @@ extern Tcl_ChannelType expChannelType;
 #define EXP_INDIRECT	2
 
 EXTERN void		expAdjust _ANSI_ARGS_((ExpState *));
-EXTERN int		expWriteChars _ANSI_ARGS_((ExpState *,char *,int));
+EXTERN int		expWriteChars _ANSI_ARGS_((ExpState *,const char *,int));
 EXTERN int		expWriteCharsUni _ANSI_ARGS_((ExpState *,Tcl_UniChar *,int));
 EXTERN void		exp_buffer_shuffle _ANSI_ARGS_((Tcl_Interp *,ExpState *,int,char *,char *));
 EXTERN int		exp_close _ANSI_ARGS_((Tcl_Interp *,ExpState *));
@@ -219,7 +219,7 @@ EXTERN void		exp_close_all _ANSI_ARGS_((Tcl_Interp *));
 EXTERN void		exp_ecmd_remove_fd_direct_and_indirect 
 				_ANSI_ARGS_((Tcl_Interp *,int));
 EXTERN void		exp_trap_on _ANSI_ARGS_((int));
-EXTERN int		exp_trap_off _ANSI_ARGS_((char *));
+EXTERN int		exp_trap_off _ANSI_ARGS_((const char *));
 
 EXTERN void		exp_strftime(char *format, const struct tm *timeptr,Tcl_DString *dstring);
 
@@ -288,7 +288,7 @@ struct exp_i {
 };
 
 EXTERN struct exp_i *	exp_new_i_complex _ANSI_ARGS_((Tcl_Interp *,
-					const char *, int, Tcl_VarTraceProc *));
+					char *, int, Tcl_VarTraceProc *));
 EXTERN struct exp_i *	exp_new_i_simple _ANSI_ARGS_((ExpState *,int));
 EXTERN struct exp_state_list *exp_new_state _ANSI_ARGS_((ExpState *));
 EXTERN void		exp_free_i _ANSI_ARGS_((Tcl_Interp *,struct exp_i *,
@@ -324,9 +324,9 @@ EXTERN void		exp_init_trap_cmds _ANSI_ARGS_((Tcl_Interp *));
 EXTERN void		exp_init_interact_cmds _ANSI_ARGS_((Tcl_Interp *));
 EXTERN void		exp_init_tty_cmds();
 
-EXTERN ExpState *	expStateCheck _ANSI_ARGS_((Tcl_Interp *,ExpState *,int,int,char *));
+EXTERN ExpState *	expStateCheck _ANSI_ARGS_((Tcl_Interp *,ExpState *,int,int,const char *));
 EXTERN ExpState *       expStateCurrent _ANSI_ARGS_((Tcl_Interp *,int,int,int));
-EXTERN ExpState *       expStateFromChannelName _ANSI_ARGS_((Tcl_Interp *,char *,int,int,int,char *));
+EXTERN ExpState *       expStateFromChannelName _ANSI_ARGS_((Tcl_Interp *,const char *,int,int,int,const char *));
 EXTERN void		expStateFree _ANSI_ARGS_((ExpState *));
 
 EXTERN ExpState *	expCreateChannel _ANSI_ARGS_((Tcl_Interp *,int,int,int));
