@@ -12,7 +12,7 @@ would appreciate credit if this program or parts of it are used.
 #ifndef _NIST_DBG
 #define _NIST_DBG
 
-#include "tcl.h"
+#include "expect.h"
 
 typedef int (Dbg_InterProc) _ANSI_ARGS_((Tcl_Interp *interp, ClientData data));
 typedef int (Dbg_IgnoreFuncsProc) _ANSI_ARGS_((

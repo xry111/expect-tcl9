@@ -13,7 +13,7 @@ would appreciate credit if this program or parts of it are used.
 #define _EXPECT_TCL_H
 
 #include <stdio.h>
-#include "expect_comm.h"
+#include "expect.h"
 
 /*
  * This is a convenience macro used to initialize a thread local storage ptr.

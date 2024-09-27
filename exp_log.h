@@ -1,5 +1,7 @@
 /* exp_log.h */
 
+#include "expect.h"
+
 extern void		expErrorLog _ANSI_ARGS_(TCL_VARARGS(char *,fmt));
 extern void		expErrorLogU _ANSI_ARGS_((char *));
 
