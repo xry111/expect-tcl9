@@ -40,8 +40,8 @@
 extern int		expSetBlockModeProc _ANSI_ARGS_((int fd, int mode));
 static int		ExpBlockModeProc _ANSI_ARGS_((ClientData instanceData,
 			    int mode));
-static int		ExpCloseProc _ANSI_ARGS_((ClientData instanceData,
-			    Tcl_Interp *interp));
+static int		ExpClose2Proc _ANSI_ARGS_((ClientData instanceData,
+			    Tcl_Interp *interp, int flags));
 static int		ExpInputProc _ANSI_ARGS_((ClientData instanceData,
 		            char *buf, int toRead, int *errorCode));
 static int		ExpOutputProc _ANSI_ARGS_((
@@ -59,18 +59,14 @@ void			exp_background_channelhandler _ANSI_ARGS_((ClientData,
  */
 
 Tcl_ChannelType expChannelType = {
-    "exp",				/* Type name. */
-    TCL_CHANNEL_VERSION_2,
-    ExpCloseProc,			/* Close proc. */
-    ExpInputProc,			/* Input proc. */
-    ExpOutputProc,			/* Output proc. */
-    NULL,				/* Seek proc. */
-    NULL,				/* Set option proc. */
-    NULL,				/* Get option proc. */
-    ExpWatchProc,			/* Initialize notifier. */
-    ExpGetHandleProc,			/* Get OS handles out of channel. */
-    NULL,				/* Close2 proc */
-    ExpBlockModeProc,			/* Set blocking/nonblocking mode.*/
+    .typeName = "exp",
+    .version = TCL_CHANNEL_VERSION_5,
+    .inputProc = ExpInputProc,
+    .outputProc = ExpOutputProc,
+    .watchProc = ExpWatchProc,
+    .getHandleProc = ExpGetHandleProc,
+    .close2Proc = ExpClose2Proc,
+    .blockModeProc = ExpBlockModeProc,
 };
 
 typedef struct ThreadSpecificData {
@@ -312,10 +308,14 @@ ExpOutputProc(instanceData, buf, toWrite, errorCodePtr)
 
 /*ARGSUSED*/
 static int
-ExpCloseProc(instanceData, interp)
-    ClientData instanceData;	/* Exp state. */
-    Tcl_Interp *interp;		/* For error reporting - unused. */
+ExpClose2Proc(
+    ClientData instanceData,	/* Exp state. */
+    Tcl_Interp *interp,		/* For error reporting - unused. */
+    int flags)
 {
+    if (flags & (TCL_CLOSE_READ | TCL_CLOSE_WRITE))
+	return EINVAL;
+
     ExpState *esPtr = (ExpState *) instanceData;
     ExpState **nextPtrPtr;
     ThreadSpecificData *tsdPtr = TCL_TSD_INIT(&dataKey);
