@@ -316,7 +316,7 @@ static int		/* returns TCL_whatever */
 exec_stty(
     Tcl_Interp *interp,
     int argc,
-    char **argv,
+    const char **argv,
     int devtty)		/* if true, redirect to /dev/tty */
 {
 	int i;
@@ -370,7 +370,7 @@ Exp_SttyCmd(
     ClientData clientData,
     Tcl_Interp *interp,
     int argc,
-    char **argv)
+    const char **argv)
 {
 	/* redirection symbol is not counted as a stty arg in terms */
 	/* of recognition. */
@@ -382,11 +382,11 @@ Exp_SttyCmd(
 	int cooked = FALSE;
 	int was_raw, was_echo;
 
-	char **redirect;	/* location of "<" */
-	char *infile = 0;
+	const char **redirect;	/* location of "<" */
+	const char *infile = 0;
 	int fd;			/* (slave) fd of infile */
 	int master = -1;	/* master fd of infile */
-	char **argv0 = argv;
+	const char **argv0 = argv;
 
 	for (argv=argv0+1;*argv;argv++) {
 		if (argv[0][0] == '<') {
@@ -569,7 +569,7 @@ Exp_SystemCmd(
     ClientData clientData,
     Tcl_Interp *interp,
     int argc,
-    char **argv)
+    const char **argv)
 {
 	int result = TCL_OK;
 	RETSIGTYPE (*old)();	/* save old sigalarm handler */

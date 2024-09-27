@@ -45,7 +45,7 @@ static int		ExpCloseProc _ANSI_ARGS_((ClientData instanceData,
 static int		ExpInputProc _ANSI_ARGS_((ClientData instanceData,
 		            char *buf, int toRead, int *errorCode));
 static int		ExpOutputProc _ANSI_ARGS_((
-			    ClientData instanceData, char *buf, int toWrite,
+			    ClientData instanceData, const char *buf, int toWrite,
                             int *errorCode));
 static void		ExpWatchProc _ANSI_ARGS_((ClientData instanceData,
 		            int mask));
@@ -261,7 +261,7 @@ ExpInputProc(instanceData, buf, toRead, errorCodePtr)
 static int
 ExpOutputProc(instanceData, buf, toWrite, errorCodePtr)
     ClientData instanceData;		/* Exp state. */
-    char *buf;				/* The data buffer. */
+    const char *buf;				/* The data buffer. */
     int toWrite;			/* How many bytes to write? */
     int *errorCodePtr;			/* Where to store error code. */
 {

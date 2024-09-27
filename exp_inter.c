@@ -696,8 +696,8 @@ static char *
 inter_updateproc(
     ClientData clientData,
     Tcl_Interp *interp,	/* Interpreter containing variable. */
-    char *name1,	/* Name of variable. */
-    char *name2,	/* Second part of variable name. */
+    const char *name1,	/* Name of variable. */
+    const char *name2,	/* Second part of variable name. */
     int flags)		/* Information about what happened. */
 {
 	exp_configure_count++;

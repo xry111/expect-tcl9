@@ -398,7 +398,7 @@ char *argv[];
 #if TCL_MAJOR_VERSION >= 8
 					      -1,
 #endif
-				&elementPtr,&nextPtr,(int *)0,(int *)0);
+				&elementPtr,&nextPtr,NULL,NULL);
 			if (*elementPtr == '\0') wrap = TRUE;
 			else if (*nextPtr == '\0') wrap = FALSE;
 			else wrap = TRUE;

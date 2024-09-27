@@ -351,7 +351,7 @@ expDiagLogPtrStrStr(fmt,str1,str2)
   (*expDiagLogPtrVal)(buf);
 }
 
-static char *		(*expErrnoMsgVal) _ANSI_ARGS_((int));
+static const char *		(*expErrnoMsgVal) _ANSI_ARGS_((int));
 
 char *
 expErrnoMsg(errorNo)
@@ -362,7 +362,7 @@ int errorNo;
 
 void
 expErrnoMsgSet(fn)
-     char * (*fn) _ANSI_ARGS_((int));
+     const char * (*fn) _ANSI_ARGS_((int));
 {
   expErrnoMsgVal = fn;
 }

@@ -163,8 +163,8 @@ static char *exp_indirect_update1( /* 1-part Tcl variable names */
 static char *exp_indirect_update2( /* 2-part Tcl variable names */
     ClientData clientData,
     Tcl_Interp *interp,	/* Interpreter containing variable. */
-    char *name1,	/* Name of variable. */
-    char *name2,	/* Second part of variable name. */
+    const char *name1,	/* Name of variable. */
+    const char *name2,	/* Second part of variable name. */
     int flags);		/* Information about what happened. */
 
 #ifdef SIMPLE_EVENT
@@ -2123,8 +2123,8 @@ static char *
 exp_indirect_update2(
     ClientData clientData,
     Tcl_Interp *interp,	/* Interpreter containing variable. */
-    char *name1,	/* Name of variable. */
-    char *name2,	/* Second part of variable name. */
+    const char *name1,	/* Name of variable. */
+    const char *name2,	/* Second part of variable name. */
     int flags)		/* Information about what happened. */
 {
 	char *msg;

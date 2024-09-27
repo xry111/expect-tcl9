@@ -288,7 +288,7 @@ struct exp_i {
 };
 
 EXTERN struct exp_i *	exp_new_i_complex _ANSI_ARGS_((Tcl_Interp *,
-					char *, int, Tcl_VarTraceProc *));
+					const char *, int, Tcl_VarTraceProc *));
 EXTERN struct exp_i *	exp_new_i_simple _ANSI_ARGS_((ExpState *,int));
 EXTERN struct exp_state_list *exp_new_state _ANSI_ARGS_((ExpState *));
 EXTERN void		exp_free_i _ANSI_ARGS_((Tcl_Interp *,struct exp_i *,
