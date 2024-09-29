@@ -326,8 +326,9 @@ exp_eval_with_one_arg(
 		 numWords--, tokenPtr += (tokenPtr->numComponents + 1)) {
 		/* FUTURE: Save token information, do substitution later */
 
-		Tcl_Obj* w = Tcl_EvalTokens(interp, tokenPtr+1,
+		rc = Tcl_EvalTokensStandard(interp, tokenPtr+1,
 			tokenPtr->numComponents);
+		Tcl_Obj* w = (rc == TCL_OK ? Tcl_GetObjResult(interp) : NULL);
 		/* w has refCount 1 here, if not NULL */
 		if (w == NULL) {
 		    Tcl_DecrRefCount (res);
@@ -336,7 +337,7 @@ exp_eval_with_one_arg(
 
 		}
 		Tcl_ListObjAppendElement (interp, res, w);
-		Tcl_DecrRefCount (w); /* Local reference goes away */
+		Tcl_ResetResult (interp); /* Local reference goes away */
 	    }
 	}
 
