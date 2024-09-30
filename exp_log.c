@@ -384,6 +384,7 @@ expDiagChannelOpen(interp,filename)
     }
     Tcl_RegisterChannel(interp,tsdPtr->diagChannel);
     Tcl_SetChannelOption(interp,tsdPtr->diagChannel,"-buffering","none");
+    Tcl_SetChannelOption(interp,tsdPtr->diagChannel,"-profile","tcl8");
     return TCL_OK;
 }
 
@@ -509,6 +510,7 @@ expLogChannelOpen(interp,filename,append)
     }
     Tcl_RegisterChannel(interp,tsdPtr->logChannel);
     Tcl_SetChannelOption(interp,tsdPtr->logChannel,"-buffering","none");
+    Tcl_SetChannelOption(interp,tsdPtr->logChannel,"-profile","tcl8");
     expLogAppendSet(append);
     return TCL_OK;
 }

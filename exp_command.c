@@ -3478,6 +3478,7 @@ Exp_OpenObjCmd(
      */
     channel = Tcl_MakeFileChannel((ClientData)(long)newfd,TCL_READABLE|TCL_WRITABLE);
     Tcl_RegisterChannel(interp, channel);
+    Tcl_SetChannelOption(interp, channel, "-profile", "tcl8");
     Tcl_AppendResult(interp, Tcl_GetChannelName(channel), (char *) NULL);
     return TCL_OK;
 
