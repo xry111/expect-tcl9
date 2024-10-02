@@ -648,6 +648,7 @@ Tcl_Interp *interp;
     Tcl_Eval(interp, "chan configure stdin -profile tcl8");
     Tcl_Eval(interp, "chan configure stdout -profile tcl8");
     Tcl_Eval(interp, "chan configure stderr -profile tcl8");
+    Tcl_Eval(interp, "interp alias {} case {} switch");
     Tcl_ResetResult(interp);
 
 #ifdef TCL_DEBUGGER
