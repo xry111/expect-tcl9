@@ -577,6 +577,10 @@ Tcl_Interp *interp;
         return TCL_ERROR;
     }
  
+    if (TclRenameCommand(interp, "open", "_open.pre_expect") != TCL_OK) {
+        return TCL_ERROR;
+    }
+
     if (Tcl_PkgProvide(interp, "Expect", PACKAGE_VERSION) != TCL_OK) {
       return TCL_ERROR;
     }

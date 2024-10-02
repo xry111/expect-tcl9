@@ -2514,10 +2514,11 @@ Exp_ExitObjCmd(
     }
 
     /*
-     * Restore previous definition of close.  Needed when expect is
-     * dynamically loaded after close has been redefined
+     * Restore previous definition of open & close.  Needed when expect is
+     * dynamically loaded after they've been redefined
      * e.g.  the virtual file system in tclkit
      */
+    Tcl_Eval(interp, "rename _open.pre_expect open");
     Tcl_Eval(interp, "rename _close.pre_expect close");
     Tcl_Exit(value);
     /*NOTREACHED*/
@@ -3487,6 +3488,38 @@ Exp_OpenObjCmd(
     return TCL_ERROR;
 }
 
+int
+Exp_Tcl8OpenObjCmd(
+    ClientData clientData,
+    Tcl_Interp *interp,
+    Tcl_Size objc,
+    Tcl_Obj *CONST objv[])
+{
+    if (objc < 2 || objc > 4) {
+	Tcl_WrongNumArgs(interp, 1, objv, "fileName ?access? ?permissions?");
+	return TCL_ERROR;
+    }
+
+    Tcl_Obj *new_objv[4] = {Tcl_NewStringObj("_open.pre_expect", -1)};
+
+    for (Tcl_Size i = 1; i < objc; i++)
+	new_objv[i] = objv[i];
+
+    if (Tcl_EvalObjv(interp, objc, new_objv, 0) != TCL_OK)
+	return TCL_ERROR;
+
+    const char *chan_name = Tcl_GetStringResult(interp);
+    Tcl_DecrRefCount(new_objv[0]);
+    Tcl_ResetResult(interp);
+
+    Tcl_Channel chan = Tcl_GetChannel(interp, chan_name, NULL);
+    if (chan)
+	Tcl_SetChannelOption(interp, chan, "-profile", "tcl8");
+
+    Tcl_AppendResult(interp, chan_name, NULL);
+    return TCL_OK;
+}
+
 /* return 1 if a string is substring of a flag */
 /* this version is the code used by the macro that everyone calls */
 int
@@ -3567,6 +3600,7 @@ static struct exp_cmd_data cmd_data[]  = {
     {"strace",	     Exp_StraceObjCmd,      0,	(ClientData)0,	0},
     {"wait",	     Exp_WaitObjCmd,        0,	(ClientData)0,	0},
     {"exp_configure",Exp_ConfigureObjCmd,   0,	(ClientData)0,	0},
+    {"open",	     Exp_Tcl8OpenObjCmd,    0,	(ClientData)0,	EXP_REDEFINE},
     {0}};
 
 void
